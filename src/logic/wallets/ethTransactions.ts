@@ -3,7 +3,7 @@ import { BigNumber } from 'bignumber.js'
 import { EthAdapterTransaction } from '@gnosis.pm/safe-core-sdk/dist/src/ethereumLibs/EthAdapter'
 
 import { getSDKWeb3Adapter, getWeb3, getWeb3ReadOnly } from 'src/logic/wallets/getWeb3'
-import { getGasPrice, getGasPriceOracles } from 'src/config'
+import { getGasPrice, getGasPriceOracles, getRpcServiceUrl } from 'src/config'
 import { GasPriceOracle } from 'src/config/networks/network'
 import { CodedException, Errors } from '../exceptions/CodedException'
 
@@ -21,9 +21,23 @@ const fetchGasPrice = async (gasPriceOracle: GasPriceOracle): Promise<string> =>
   return new BigNumber(data[gasParameter]).multipliedBy(gweiFactor).toString()
 }
 
+const fetchGasPriceFromRpc = async (url: string): Promise<string> => {
+  const { data: response } = await axios.post(url, '{"jsonrpc":"2.0","method":"eth_gasPrice","params": [],"id":1}', {
+    headers: { 'Content-Type': 'application/json' },
+  })
+  return response.result
+}
+
 export const calculateGasPrice = async (): Promise<string> => {
   const gasPrice = getGasPrice()
   const gasPriceOracles = getGasPriceOracles()
+
+  try {
+    const result = new BigNumber(await fetchGasPriceFromRpc(getRpcServiceUrl()))
+    return result.toString()
+  } catch (e) {
+    console.log
+  }
 
   if (gasPrice) {
     // Fixed gas price in configuration. xDai uses this approach
