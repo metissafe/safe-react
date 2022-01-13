@@ -69,7 +69,7 @@ const stardust: NetworkConfig = {
     WALLETS.KEYSTONE,
     WALLETS.WALLET_CONNECT,
   ],
-  disabledFeatures: [FEATURES.DOMAIN_LOOKUP, FEATURES.SPENDING_LIMIT],
+  disabledFeatures: [FEATURES.DOMAIN_LOOKUP, FEATURES.SPENDING_LIMIT, FEATURES.SAFE_APPS],
 }
 
 export default stardust
