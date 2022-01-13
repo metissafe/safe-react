@@ -35,7 +35,7 @@ export const andromedaPriceHelper = async ({
   oldTokenBalances,
   priceHelper,
 }: AndromedaPriceHelperParams): Promise<SafeBalanceResponse> => {
-  const fiatTotal = new BigNumber(0)
+  let fiatTotal = new BigNumber(0)
   vsCurrency = vsCurrency.toLowerCase()
 
   const tokens = oldTokenBalances.items.map((item) => {
@@ -63,7 +63,7 @@ export const andromedaPriceHelper = async ({
       const balance = getFiatBalance(item.balance, fiatConversion, decimals)
       item.fiatConversion = fiatConversion
       item.fiatBalance = balance.toString()
-      fiatTotal.plus(balance)
+      fiatTotal = fiatTotal.plus(balance)
 
       return item
     }),
