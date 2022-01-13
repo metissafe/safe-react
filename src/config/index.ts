@@ -12,6 +12,7 @@ import {
   NetworkSettings,
   SafeFeatures,
   Wallets,
+  TokenPriceHelpers,
 } from 'src/config/networks/network.d'
 import { isValidShortChainName } from 'src/routes/routes'
 import {
@@ -142,6 +143,8 @@ export const getTxServiceUrl = (): string => getConfig().txServiceUrl
 export const getGasPrice = (): number | undefined => getConfig()?.gasPrice
 
 export const getGasPriceOracles = (): GasPriceOracle[] | undefined => getConfig()?.gasPriceOracles
+
+export const getPriceHelper = (): TokenPriceHelpers | undefined => getConfig()?.network?.tokenPriceHelpers
 
 const useInfuraRPC = () => {
   return [ETHEREUM_NETWORK.MAINNET, ETHEREUM_NETWORK.RINKEBY, ETHEREUM_NETWORK.POLYGON].includes(getNetworkId())

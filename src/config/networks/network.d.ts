@@ -1,5 +1,8 @@
 // matches src/logic/tokens/store/model/token.ts `TokenProps` type
 
+import { SafeBalanceResponse } from '@gnosis.pm/safe-react-gateway-sdk'
+import { TokenBalance } from 'src/logic/safe/api/fetchTokenCurrenciesBalances'
+
 export enum WALLETS {
   METAMASK = 'metamask',
   WALLET_CONNECT = 'walletConnect',
@@ -75,6 +78,12 @@ export enum SHORT_NAME {
   VOLTA = 'vt',
 }
 
+type TokenPriceHelpers = {
+  pricesApi: string
+  nativeTokenAddress: string
+  priceLogic: (any) => Promise<SafeBalanceResponse>
+}
+
 export type NetworkSettings = {
   id: ETHEREUM_NETWORK
   shortName: SHORT_NAME
@@ -83,6 +92,7 @@ export type NetworkSettings = {
   label: string
   ethereumLayer: ETHEREUM_LAYER
   nativeCoin: Token
+  tokenPriceHelpers?: TokenPriceHelpers
 }
 
 // something around this to display or not some critical sections in the app, depending on the network support

@@ -9,6 +9,8 @@ import {
   WALLETS,
 } from 'src/config/networks/network.d'
 
+import { andromedaPriceHelper } from 'src/logic/safe/api/fetchTokenCurrenciesBalances'
+
 const baseConfig: EnvironmentSettings = {
   clientGatewayUrl: 'https://andromeda-infra.metissafe.tech/cgw/v1',
   txServiceUrl: 'https://andromeda-infra.metissafe.tech/txs/api/v1',
@@ -45,6 +47,11 @@ const andromeda: NetworkConfig = {
       symbol: 'METIS',
       decimals: 18,
       logoUri: MetisLogo,
+    },
+    tokenPriceHelpers: {
+      nativeTokenAddress: '0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000',
+      pricesApi: 'https://api.coingecko.com/api/v3/simple/token_price/',
+      priceLogic: andromedaPriceHelper,
     },
   },
   disabledWallets: [

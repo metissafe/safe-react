@@ -8,6 +8,7 @@ import {
   SHORT_NAME,
   WALLETS,
 } from 'src/config/networks/network.d'
+import { andromedaPriceHelper } from 'src/logic/safe/api/fetchTokenCurrenciesBalances'
 
 const baseConfig: EnvironmentSettings = {
   clientGatewayUrl: 'https://stardust-infra.metissafe.tech/cgw/v1',
@@ -45,6 +46,11 @@ const stardust: NetworkConfig = {
       symbol: 'tMETIS',
       decimals: 18,
       logoUri: MetisLogo,
+    },
+    tokenPriceHelpers: {
+      nativeTokenAddress: '0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000',
+      pricesApi: 'https://api.coingecko.com/api/v3/simple/token_price/',
+      priceLogic: andromedaPriceHelper,
     },
   },
   disabledWallets: [
