@@ -70,7 +70,7 @@ const andromeda: NetworkConfig = {
     WALLETS.KEYSTONE,
     WALLETS.WALLET_CONNECT,
   ],
-  disabledFeatures: [FEATURES.DOMAIN_LOOKUP, FEATURES.SPENDING_LIMIT, FEATURES.SAFE_APPS],
+  disabledFeatures: [FEATURES.DOMAIN_LOOKUP, FEATURES.SPENDING_LIMIT],
 }
 
 export default andromeda
